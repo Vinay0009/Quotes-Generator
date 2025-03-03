@@ -6,7 +6,7 @@ async function fetchQuote() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${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}`
+            "Authorization": `Bearer ${}`
         },
         body: JSON.stringify({
             model: "gpt-3.5-turbo",
