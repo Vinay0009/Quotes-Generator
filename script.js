@@ -1,20 +1,9 @@
-async function fetchQuote() {
+function fetchQuote() {
     let keyword = document.getElementById("keyword").value;
-    let apiKey = "YOUR_OPENAI_API_KEY";  // 🔹 Replace with your actual API key
-
-    let response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: `Give me a quote about ${keyword}` }],
-            max_tokens: 50
+    fetch(`https://api.quotable.io/random?tags=${keyword}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("quote").innerText = data.content || "No quote found!";
         })
-    });
-
-    let data = await response.json();
-    document.getElementById("quote").innerText = data.choices[0].message.content || "No quote found!";
+        .catch(error => console.error("Error fetching quote:", error));
 }
