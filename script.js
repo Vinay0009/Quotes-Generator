@@ -1,9 +1,11 @@
 function fetchQuote() {
-    let keyword = document.getElementById("keyword").value;
-    fetch(`https://api.quotable.io/random?tags=${keyword}`)
+    fetch("https://api.quotable.io/random") // No tags, just a random quote
         .then(response => response.json())
         .then(data => {
-            document.getElementById("quote").innerText = data.content || "No quote found!";
+            document.getElementById("quote").innerText = `"${data.content}" - ${data.author}`;
         })
-        .catch(error => console.error("Error fetching quote:", error));
+        .catch(error => {
+            console.error("Error fetching quote:", error);
+            document.getElementById("quote").innerText = "Could not fetch a quote. Try again!";
+        });
 }
